@@ -18,9 +18,9 @@ package controllers
 
 import (
 	"context"
+	"database/sql"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	_ "github.com/jackc/pgx/v4/stdlib"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -59,13 +59,15 @@ func (r *DatabaseReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 	}
 	dsn := "host=postgresql.oggy.haugland.io port=5432 user=postgres password=postgres dbname=postgres"
 
-	dbClient, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	dbClient, err := sql.Open("pgx", dsn)
 	if err != nil {
-		return ctrl.Result{}, errors.Wrap(err, "failed to connect to database")
+		return ctrl.Result{}, errors.Wrap(err, "Failed to connect to database")
 	}
 	defer dbClient.Close()
 
-	// TODO(user): your logic here
+	if _, err := dbClient.ExecContext(ctx, "CREATE DATABASE IF NOT EXISTS ? WITH ENCODING = ?", db.Name, db.Spec.Encoding); err != nil {
+		return ctrl.Result{}, errors.Wrap(err, "Failed to create database")
+	}
 
 	return ctrl.Result{}, nil
 }
