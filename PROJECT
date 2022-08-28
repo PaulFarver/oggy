@@ -25,4 +25,31 @@ resources:
   kind: User
   path: github.com/paulfarver/oggy/api/v1alpha1
   version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: oggy.haugland.io
+  group: crdb
+  kind: Grant
+  path: github.com/paulfarver/oggy/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: oggy.haugland.io
+  group: crdb
+  kind: BackupSchedule
+  path: github.com/paulfarver/oggy/api/v1alpha1
+  version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: oggy.haugland.io
+  group: crdb
+  kind: Cluster
+  path: github.com/paulfarver/oggy/api/v1alpha1
+  version: v1alpha1
 version: "3"

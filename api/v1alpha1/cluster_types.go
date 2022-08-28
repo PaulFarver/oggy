@@ -23,28 +23,37 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// DatabaseSpec defines the desired state of Database
-type DatabaseSpec struct {
+// ClusterSpec defines the desired state of Cluster
+type ClusterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Database. Edit database_types.go to remove/update
-	Encoding      string `json:"encoding,omitempty"`
-	ReclaimPolicy string `json:"reclaimPolicy,omitempty"`
-
-	Cluster ClusterRef `json:"cluster,omitempty"`
-	// Cluster string `json:"cluster,omitempty"`
+	// The hos of cockroachdb cluster
+	Host           string             `json:"host"`
+	Port           int                `json:"port"`
+	Authentication AuthenticationSpec `json:"authentication"`
 }
 
-type ClusterRef struct {
-	Name      string `json:"name,omitempty"`
-	Namespace string `json:"namespace,omitempty"`
+type AuthenticationSpec struct {
+	Username string       `json:"username"`
+	TLS      TLSSpec      `json:"tls"`
+	Password PasswordSpec `json:"password"`
 }
 
-// DatabaseStatus defines the observed state of Database
-type DatabaseStatus struct {
-	Provisioned bool   `json:"provisioned,omitempty"`
-	ID          string `json:"id,omitempty"`
+type PasswordSpec struct {
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+	Key       string `json:"key"`
+}
+
+type TLSSpec struct {
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+	Mode      string `json:"mode"`
+}
+
+// ClusterStatus defines the observed state of Cluster
+type ClusterStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -52,24 +61,24 @@ type DatabaseStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// Database is the Schema for the databases API
-type Database struct {
+// Cluster is the Schema for the clusters API
+type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   DatabaseSpec   `json:"spec,omitempty"`
-	Status DatabaseStatus `json:"status,omitempty"`
+	Spec   ClusterSpec   `json:"spec,omitempty"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// DatabaseList contains a list of Database
-type DatabaseList struct {
+// ClusterList contains a list of Cluster
+type ClusterList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Database `json:"items"`
+	Items           []Cluster `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Database{}, &DatabaseList{})
+	SchemeBuilder.Register(&Cluster{}, &ClusterList{})
 }

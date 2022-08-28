@@ -23,28 +23,17 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// DatabaseSpec defines the desired state of Database
-type DatabaseSpec struct {
+// BackupScheduleSpec defines the desired state of BackupSchedule
+type BackupScheduleSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Database. Edit database_types.go to remove/update
-	Encoding      string `json:"encoding,omitempty"`
-	ReclaimPolicy string `json:"reclaimPolicy,omitempty"`
-
-	Cluster ClusterRef `json:"cluster,omitempty"`
-	// Cluster string `json:"cluster,omitempty"`
+	// Foo is an example field of BackupSchedule. Edit backupschedule_types.go to remove/update
+	Foo string `json:"foo,omitempty"`
 }
 
-type ClusterRef struct {
-	Name      string `json:"name,omitempty"`
-	Namespace string `json:"namespace,omitempty"`
-}
-
-// DatabaseStatus defines the observed state of Database
-type DatabaseStatus struct {
-	Provisioned bool   `json:"provisioned,omitempty"`
-	ID          string `json:"id,omitempty"`
+// BackupScheduleStatus defines the observed state of BackupSchedule
+type BackupScheduleStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -52,24 +41,24 @@ type DatabaseStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// Database is the Schema for the databases API
-type Database struct {
+// BackupSchedule is the Schema for the backupschedules API
+type BackupSchedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   DatabaseSpec   `json:"spec,omitempty"`
-	Status DatabaseStatus `json:"status,omitempty"`
+	Spec   BackupScheduleSpec   `json:"spec,omitempty"`
+	Status BackupScheduleStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// DatabaseList contains a list of Database
-type DatabaseList struct {
+// BackupScheduleList contains a list of BackupSchedule
+type BackupScheduleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Database `json:"items"`
+	Items           []BackupSchedule `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Database{}, &DatabaseList{})
+	SchemeBuilder.Register(&BackupSchedule{}, &BackupScheduleList{})
 }

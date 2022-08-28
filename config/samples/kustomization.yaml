@@ -2,4 +2,7 @@
 resources:
 - crdb_v1alpha1_database.yaml
 - crdb_v1alpha1_user.yaml
+- crdb_v1alpha1_grant.yaml
+- crdb_v1alpha1_backupschedule.yaml
+- crdb_v1alpha1_cluster.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples

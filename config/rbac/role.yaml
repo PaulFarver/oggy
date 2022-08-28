@@ -8,6 +8,58 @@ rules:
 - apiGroups:
   - crdb.oggy.haugland.io
   resources:
+  - backupschedules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - backupschedules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - backupschedules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - clusters
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - clusters/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - clusters/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
   - databases
   verbs:
   - create
@@ -27,6 +79,32 @@ rules:
   - crdb.oggy.haugland.io
   resources:
   - databases/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - grants
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - grants/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - crdb.oggy.haugland.io
+  resources:
+  - grants/status
   verbs:
   - get
   - patch

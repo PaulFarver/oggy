@@ -1,0 +1,6 @@
+apiVersion: crdb.oggy.haugland.io/v1alpha1
+kind: BackupSchedule
+metadata:
+  name: backupschedule-sample
+spec:
+  # TODO(user): Add fields here

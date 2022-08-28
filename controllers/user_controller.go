@@ -63,7 +63,6 @@ func (r *UserReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 	passwordSecret := &corev1.Secret{}
 	if err := r.Get(ctx, client.ObjectKey{Namespace: user.Namespace, Name: user.Spec.PasswordSecretRef}, passwordSecret); err != nil {
 		// Generate a new password and store it in the secret.
-
 		passwordSecret = &corev1.Secret{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      user.Spec.PasswordSecretRef,
@@ -110,8 +109,6 @@ func (r *UserReconciler) SetupWithManager(mgr ctrl.Manager) error {
 		Owns(&corev1.Secret{}).
 		Complete(r)
 }
-
-// const runes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 func GeneratePassword() string {
 	bs := make([]byte, 64)
